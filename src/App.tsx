@@ -1,3 +1,7 @@
+import { Router } from "./Router";
+
 export function App() {
-  return <div className="">Hello mothefucker</div>;
+  return (
+   <Router />
+  );
 }
