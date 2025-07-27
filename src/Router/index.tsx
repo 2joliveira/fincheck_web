@@ -9,8 +9,8 @@ export function Router() {
       <Routes>
         <Route element={<AuthGuard isPrivate={false} />}>
           <Route element={<AuthLayout />}>
-            <Route path="/login" element={<Signin />} />
-            <Route path="/register" element={<SignUp />} />
+            <Route path="/signin" element={<Signin />} />
+            <Route path="/signup" element={<SignUp />} />
           </Route>
         </Route>
 
