@@ -3,6 +3,7 @@ import z from "zod";
 import { zodResolver } from "@hookform/resolvers/zod";
 
 const schema = z.object({
+  name: z.string().nonempty("Nome é pbrigatório."),
   email: z.email("E-mail inválido"),
   password: z
     .string()
@@ -12,11 +13,11 @@ const schema = z.object({
 
 type FormData = z.infer<typeof schema>;
 
-export function useSigninForm() {
+export function useSignupForm() {
   const {
     register,
-    formState: { errors },
     handleSubmit: hookFormSubmit,
+    formState: { errors },
   } = useForm<FormData>({
     resolver: zodResolver(schema),
   });
@@ -25,5 +26,9 @@ export function useSigninForm() {
     console.log({ data });
   });
 
-  return { register, handleSubmit, errors };
+  return {
+    register,
+    handleSubmit,
+    errors,
+  };
 }
