@@ -4,7 +4,7 @@ import { Logo } from "../components/Logo";
 
 export function AuthLayout() {
   return (
-    <div className="flex h-full w-full">
+    <div className="flex h-full w-full gap-4">
       <div className="flex h-full flex-col items-center justify-center gap-16 sm:w-full 2xl:w-1/2">
         <Logo className="h-6 text-gray-500" />
 
