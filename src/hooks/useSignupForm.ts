@@ -23,7 +23,6 @@ export function useSignupForm() {
     register,
     handleSubmit: hookFormSubmit,
     formState: { errors },
-    reset,
   } = useForm<FormData>({
     resolver: zodResolver(schema),
   });
@@ -37,7 +36,6 @@ export function useSignupForm() {
   const handleSubmit = hookFormSubmit(async (data) => {
     try {
       await mutateAsync(data);
-      reset();
     } catch {
       toast.error("Ocorreu um erro ao criar sua conta!");
     }
