@@ -1,7 +1,7 @@
 import { QueryClient, QueryClientProvider } from "@tanstack/react-query";
-import { Router } from "./Router";
+import { Router } from "./router";
 import { Toaster } from "react-hot-toast";
-import { AuthProvider } from "./contexts/auth/AuthProvider";
+import { AuthProvider } from "./app/contexts/auth/AuthProvider";
 
 const queryClient = new QueryClient();
 

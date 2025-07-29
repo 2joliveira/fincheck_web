@@ -1,7 +1,6 @@
-/* eslint-disable @typescript-eslint/no-empty-object-type */
 import type { ComponentProps } from "react";
-import { cn } from "../utils/cn";
 import { Spinner } from "./Spinner";
+import { cn } from "../../app/utils/cn";
 
 interface ButtonProps extends ComponentProps<"button"> {
   isLoading?: boolean;
