@@ -1,7 +1,7 @@
 import { BrowserRouter, Routes, Route } from "react-router-dom";
 import { AuthGuard } from "./AuthGuard";
-import { Dashboard, Signin, SignUp } from "../pages";
-import { AuthLayout } from "../layouts/AuthLayout";
+import { AuthLayout } from "../view/layouts/AuthLayout";
+import { Dashboard, Signin, SignUp } from "../view/pages";
 
 export function Router() {
   return (

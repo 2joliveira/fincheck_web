@@ -2,9 +2,9 @@ import { useForm } from "react-hook-form";
 import z from "zod";
 import { zodResolver } from "@hookform/resolvers/zod";
 import { useMutation } from "@tanstack/react-query";
-import type { SigninParams } from "../services/authService/signin";
-import { authService } from "../services/authService";
 import toast from "react-hot-toast";
+import type { SigninParams } from "../../../app/services/authService/signin";
+import { authService } from "../../../app/services/authService";
 
 const schema = z.object({
   email: z.email("E-mail inválido"),
