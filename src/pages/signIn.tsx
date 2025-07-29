@@ -4,7 +4,7 @@ import { Button } from "../components/Button";
 import { useSigninForm } from "../hooks/useSigninForm";
 
 export function Signin() {
-  const { register, handleSubmit, errors } = useSigninForm();
+  const { register, handleSubmit, errors, isLoading } = useSigninForm();
 
   return (
     <>
@@ -40,7 +40,7 @@ export function Signin() {
           {...register("password")}
         />
 
-        <Button type="submit" className="mt-2">
+        <Button type="submit" className="mt-2" isLoading={isLoading}>
           Entrar
         </Button>
       </form>
