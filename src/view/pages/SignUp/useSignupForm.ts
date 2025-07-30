@@ -5,6 +5,7 @@ import { useForm } from "react-hook-form";
 import { zodResolver } from "@hookform/resolvers/zod";
 import type { SignupParams } from "../../../app/services/authService/signup";
 import { authService } from "../../../app/services/authService";
+import { useAuth } from "../../../app/hooks/useAuth";
 
 const schema = z.object({
   name: z.string().nonempty("Nome é pbrigatório."),
@@ -32,9 +33,13 @@ export function useSignupForm() {
     },
   });
 
+  const { signin } = useAuth();
+
   const handleSubmit = hookFormSubmit(async (data) => {
     try {
-      await mutateAsync(data);
+      const { accessToken } = await mutateAsync(data);
+
+      signin(accessToken);
     } catch {
       toast.error("Ocorreu um erro ao criar sua conta!");
     }
