@@ -3,9 +3,9 @@ import { useMutation } from "@tanstack/react-query";
 import z from "zod";
 import { useForm } from "react-hook-form";
 import { zodResolver } from "@hookform/resolvers/zod";
-import type { SignupParams } from "../../../app/services/authService/signup";
-import { authService } from "../../../app/services/authService";
-import { useAuth } from "../../../app/hooks/useAuth";
+import type { SignupParams } from "@/app/services/authService/signup";
+import { authService } from "@/app/services/authService";
+import { useAuth } from "@/app/hooks/useAuth";
 
 const schema = z.object({
   name: z.string().nonempty("Nome é pbrigatório."),
