@@ -1,6 +1,6 @@
 import type { ComponentProps } from "react";
 import { Spinner } from "./Spinner";
-import { cn } from "../../app/utils/cn";
+import { cn } from "@/app/utils/cn";
 
 interface ButtonProps extends ComponentProps<"button"> {
   isLoading?: boolean;

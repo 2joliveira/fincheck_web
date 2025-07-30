@@ -1,7 +1,6 @@
 import { Link } from "react-router-dom";
 import { useSigninForm } from "./useSigninForm";
-import { Input } from "../../components/Input";
-import { Button } from "../../components/Button";
+import { Button, Input } from "@/view/components";
 
 export function Signin() {
   const { register, handleSubmit, errors, isLoading } = useSigninForm();

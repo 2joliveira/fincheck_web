@@ -1,7 +1,6 @@
 import { Link } from "react-router-dom";
 import { useSignupForm } from "./useSignupForm";
-import { Input } from "../../components/Input";
-import { Button } from "../../components/Button";
+import { Button, Input } from "@/view/components";
 
 export function SignUp() {
   const { handleSubmit, register, errors, isLoading } = useSignupForm();
