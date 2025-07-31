@@ -8,16 +8,16 @@ export function Signin() {
   return (
     <>
       <header className="flex flex-col items-center gap-4">
-        <h1 className="tracking[-1px] text-2xl font-bold text-gray-900">
+        <h1 className="tracking-[-1px] text-2xl font-bold text-gray-900">
           Entre em sua conta
         </h1>
 
         <p className="space-x-2">
-          <span className="tracking[-0.5] text-gray-700">Novo por aqui?</span>
+          <span className="tracking-[-0.5] text-gray-700">Novo por aqui?</span>
 
           <Link
             to="/signup"
-            className="tracking[-0.5] font-medium text-green-900 hover:text-green-800"
+            className="tracking-[-0.5] font-medium text-green-900 hover:text-green-800"
           >
             Crie uma conta
           </Link>
