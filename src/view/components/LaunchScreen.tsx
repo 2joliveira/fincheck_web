@@ -11,7 +11,7 @@ export function LaunchScreen({ isLoading }: LaunchScreenProps) {
     <Transition show={isLoading}>
       <div
         className="fixed flex h-full w-full flex-col items-center justify-center gap-6 bg-teal-900
-        transition duration-300 ease-in data-closed:opacity-0"
+        transition duration-300 ease-in data-closed:opacity-0 z-50"
       >
         <Logo className="h-10 text-white" />
         <Spinner className="fill-white text-teal-900" />
