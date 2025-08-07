@@ -5,9 +5,17 @@ import { AccountCard } from "./AccountCard";
 import "swiper/css";
 import { SliderNavigation } from "./SliderNavigation";
 import { useAccountsController } from "./useAccountsController";
+import { formatCurrency } from "@/app/utils/formatCurrency";
+import { cn } from "@/app/utils/cn";
 
 export function Accounts() {
-  const { sliderState, setSliderState, windowWidth } = useAccountsController();
+  const {
+    sliderState,
+    setSliderState,
+    windowWidth,
+    areValuesVisible,
+    toggleValuesVisibility,
+  } = useAccountsController();
 
   return (
     <div className="flex h-full w-full flex-col rounded-2xl bg-teal-900 px-4 py-8 md:p-10">
@@ -15,17 +23,28 @@ export function Accounts() {
         <span className="block tracking-[-0.5px] text-white">Saldo total</span>
 
         <div className="flex items-center gap-2">
-          <strong className="text-2xl tracking-[-1px] text-white">
-            R$ 100,00
+          <strong
+            className={cn(
+              "text-2xl tracking-[-1px] text-white",
+              !areValuesVisible && "blur-sm",
+            )}
+          >
+            {formatCurrency(100)}
           </strong>
 
-          <button className="flex h-8 w-8 cursor-pointer items-center justify-center">
-            <EyeIcon open />
+          <button
+            className="flex h-8 w-8 cursor-pointer items-center justify-center"
+            onClick={toggleValuesVisibility}
+          >
+            <EyeIcon open={!areValuesVisible} />
           </button>
         </div>
       </div>
 
-      <div ref={windowWidth.ref} className="flex flex-1 flex-col justify-end mt-10 md:mt-0">
+      <div
+        ref={windowWidth.ref}
+        className="mt-10 flex flex-1 flex-col justify-end md:mt-0"
+      >
         <div>
           <Swiper
             spaceBetween={16}
