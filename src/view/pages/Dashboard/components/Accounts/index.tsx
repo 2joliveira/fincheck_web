@@ -7,6 +7,7 @@ import { SliderNavigation } from "./SliderNavigation";
 import { useAccountsController } from "./useAccountsController";
 import { formatCurrency } from "@/app/utils/formatCurrency";
 import { cn } from "@/app/utils/cn";
+import { Spinner } from "@/view/components";
 
 export function Accounts() {
   const {
@@ -15,11 +16,20 @@ export function Accounts() {
     windowWidth,
     areValuesVisible,
     toggleValuesVisibility,
+    isLoading
   } = useAccountsController();
 
   return (
     <div className="flex h-full w-full flex-col rounded-2xl bg-teal-900 px-4 py-8 md:p-10">
-      <div>
+      {isLoading && (
+        <div className="w-full h-full flex items-center justify-center">
+          <Spinner className="text-teal-950 fill-white w-12 h-12" />
+        </div>
+      )}
+
+      {!isLoading && (
+        <>
+        <div>
         <span className="block tracking-[-0.5px] text-white">Saldo total</span>
 
         <div className="flex items-center gap-2">
@@ -95,7 +105,8 @@ export function Accounts() {
             </SwiperSlide>
           </Swiper>
         </div>
-      </div>
+      </div></>
+      )}
     </div>
   );
 }
