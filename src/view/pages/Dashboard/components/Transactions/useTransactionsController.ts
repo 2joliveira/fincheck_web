@@ -13,6 +13,8 @@ export function useTransactionsController() {
     areValuesVisible,
     sliderState,
     setSliderState,
+    isInitialLoading: false,
     isLoading: true,
+    transactions: [1],
   };
 }
