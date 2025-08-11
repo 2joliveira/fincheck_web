@@ -22,7 +22,9 @@ export function Dashboard() {
 
         <Fab />
 
-        <Modal />
+        <Modal open title="Test">
+          Conteúdo
+        </Modal>
       </div>
     </DashboardProvider>
   );
