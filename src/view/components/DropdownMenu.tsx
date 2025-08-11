@@ -5,13 +5,19 @@ export function DropdownMenuRoot({ children }: { children: React.ReactNode }) {
   return <RdxDropdownMenu.Root>{children}</RdxDropdownMenu.Root>;
 }
 
+interface DropdownMenuTriggerProps {
+  children: React.ReactNode;
+  className?: string;
+}
+
 export function DropdownMenuTrigger({
   children,
-}: {
-  children: React.ReactNode;
-}) {
+  className,
+}: DropdownMenuTriggerProps) {
   return (
-    <RdxDropdownMenu.Trigger className="cursor-pointer outline-none">
+    <RdxDropdownMenu.Trigger
+      className={cn("cursor-pointer outline-none", className)}
+    >
       {children}
     </RdxDropdownMenu.Trigger>
   );
@@ -29,9 +35,11 @@ export function DropdownMenuContent({
   return (
     <RdxDropdownMenu.Portal>
       <RdxDropdownMenu.Content
-      side="bottom"
+        side="bottom"
         className={cn(
-          "space-y-2 rounded-2xl bg-white p-2 shadow-[0px_11px_20px_0px_rgba(0,0,0,0.10)] data-[side=bottom]:animate-slide-up-and-fade",
+          "space-y-2 z-50 rounded-2xl bg-white p-2 shadow-[0px_11px_20px_0px_rgba(0,0,0,0.10)]",
+          "data-[side=bottom]:animate-slide-up-and-fade",
+          "data-[side=top]:animate-slide-down-and-fade",
           className,
         )}
       >
@@ -44,7 +52,7 @@ export function DropdownMenuContent({
 interface DropdownMenuItemProps {
   children: React.ReactNode;
   className?: string;
-  handleOnSelect(): void;
+  handleOnSelect?(): void;
 }
 
 export function DropdownMenuItem({
@@ -56,7 +64,7 @@ export function DropdownMenuItem({
     <RdxDropdownMenu.Item
       onSelect={handleOnSelect}
       className={cn(
-        "text-smtext-gray-800 flex min-h-[48px] cursor-pointer items-center rounded-2xl p-4 transition-colors outline-none data-[highlighted]:bg-gray-50",
+        "text-smtext-gray-800 flex min-h-[40px] cursor-pointer items-center rounded-2xl px-4 py-2 transition-colors outline-none data-[highlighted]:bg-gray-50",
         className,
       )}
     >
