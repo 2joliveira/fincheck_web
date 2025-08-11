@@ -1,15 +1,18 @@
-import { MONTHS } from "@/app/config/constants";
-import { FilterIcon } from "@/view/components/icons/FilterIcon";
 import { Swiper, SwiperSlide } from "swiper/react";
-import { SliderOption } from "./SliderOption";
-import { SliderNavigation } from "./SliderNavigation";
-import { formatCurrency } from "@/app/utils/formatCurrency";
-import { CategoryIcon } from "@/view/components/icons/categories/CategoryIcon";
-import { cn } from "@/app/utils/cn";
-import { useTransactionsController } from "./useTransactionsController";
 import { Spinner } from "@/view/components";
+import { FilterIcon } from "@/view/components/icons/FilterIcon";
+import { CategoryIcon } from "@/view/components/icons/categories/CategoryIcon";
+import { formatCurrency } from "@/app/utils/formatCurrency";
+import { cn } from "@/app/utils/cn";
+import { useTransactionsController } from "./hooks/useTransactionsController";
+import {
+  FiltersModal,
+  SliderNavigation,
+  SliderOption,
+  TransactionFiltersDropdown,
+} from "./components";
+import { MONTHS } from "@/app/config/constants";
 import emptyStateImage from "@/assets/empty-state.svg";
-import { TransactionFiltersDropdown } from "./TransactionFiltersDropdown";
 
 export function Transactions() {
   const {
@@ -19,6 +22,9 @@ export function Transactions() {
     isInitialLoading,
     isLoading,
     transactions,
+    isFiltersModalOpen,
+    handleOpenFiltersModal,
+    handleCloseFiltersModal,
   } = useTransactionsController();
 
   const hasTransactions = transactions.length > 0;
@@ -37,7 +43,10 @@ export function Transactions() {
             <div className="flex items-center justify-between">
               <TransactionFiltersDropdown />
 
-              <button>
+              <button
+                className="cursor-pointer hover:opacity-70"
+                onClick={handleOpenFiltersModal}
+              >
                 <FilterIcon />
               </button>
             </div>
@@ -73,7 +82,7 @@ export function Transactions() {
           <main className="mt-4 flex-1 space-y-2 overflow-y-auto">
             {isLoading && (
               <div className="flex h-full flex-col items-center justify-center">
-                <Spinner className="w-12 h-12" />
+                <Spinner className="h-12 w-12" />
               </div>
             )}
 
@@ -137,6 +146,11 @@ export function Transactions() {
           </main>
         </>
       )}
+
+      <FiltersModal
+        open={isFiltersModalOpen}
+        onClose={handleCloseFiltersModal}
+      />
     </div>
   );
 }
