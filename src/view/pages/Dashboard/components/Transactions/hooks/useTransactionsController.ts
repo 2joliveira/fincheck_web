@@ -1,5 +1,5 @@
 import { useState } from "react";
-import { useDashboard } from "../../context/DashboardContext";
+import { useDashboard } from "../../../context/DashboardContext";
 
 export function useTransactionsController() {
   const { areValuesVisible } = useDashboard();
@@ -9,6 +9,16 @@ export function useTransactionsController() {
     isEnd: false,
   });
 
+  const [isFiltersModalOpen, setIsFiltersModalOpen] = useState(false);
+
+  function handleOpenFiltersModal() {
+    setIsFiltersModalOpen(true);
+  }
+
+  function handleCloseFiltersModal() {
+    setIsFiltersModalOpen(false);
+  }
+
   return {
     areValuesVisible,
     sliderState,
@@ -16,5 +26,8 @@ export function useTransactionsController() {
     isInitialLoading: false,
     isLoading: false,
     transactions: [1],
+    isFiltersModalOpen,
+    handleOpenFiltersModal,
+    handleCloseFiltersModal,
   };
 }

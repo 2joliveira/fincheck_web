@@ -1,4 +1,4 @@
-import { Logo, Modal, UserMenu } from "@/view/components";
+import { Logo, UserMenu } from "@/view/components";
 import { Accounts, Fab, Transactions } from "./components";
 import { DashboardProvider } from "./context/DashboardProvider";
 
@@ -21,10 +21,6 @@ export function Dashboard() {
         </main>
 
         <Fab />
-
-        <Modal open title="Test">
-          Conteúdo
-        </Modal>
       </div>
     </DashboardProvider>
   );
