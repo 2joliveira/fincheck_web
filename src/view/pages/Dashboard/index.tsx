@@ -1,8 +1,6 @@
-import { Logo } from "@/view/components";
-import { UserMenu } from "@/view/components/UserMenu";
-import { Accounts, Transactions } from "./components";
+import { Logo, Modal, UserMenu } from "@/view/components";
+import { Accounts, Fab, Transactions } from "./components";
 import { DashboardProvider } from "./context/DashboardProvider";
-import { Fab } from "./components/Fab";
 
 export function Dashboard() {
   return (
@@ -23,6 +21,8 @@ export function Dashboard() {
         </main>
 
         <Fab />
+
+        <Modal />
       </div>
     </DashboardProvider>
   );
