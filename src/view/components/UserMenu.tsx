@@ -13,11 +13,11 @@ export function UserMenu() {
   return (
     <DropdownMenuRoot>
       <DropdownMenuTrigger>
-        <div className="flex h-12 w-12 items-center justify-center rounded-full border border-teal-100 bg-teal-50">
+        <button className="flex h-12 w-12 cursor-pointer items-center justify-center rounded-full border border-teal-100 bg-teal-50 hover:bg-teal-100">
           <span className="tracking[-0.5px] text-sm font-medium text-teal-900">
             JO
           </span>
-        </div>
+        </button>
       </DropdownMenuTrigger>
 
       <DropdownMenuContent className="w-32">

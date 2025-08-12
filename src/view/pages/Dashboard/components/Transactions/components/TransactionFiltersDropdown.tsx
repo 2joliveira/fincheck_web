@@ -12,12 +12,14 @@ import { ChevronDownIcon } from "@radix-ui/react-icons";
 export function TransactionFiltersDropdown() {
   return (
     <DropdownMenuRoot>
-      <DropdownMenuTrigger className="flex cursor-pointer items-center gap-2 hover:opacity-80 transition-colors">
-        <TransactionsIcon />
-        <span className="text-sm font-medium tracking-[-0.5px] text-gray-800">
-          Transações
-        </span>
-        <ChevronDownIcon className="text-gray-900" />
+      <DropdownMenuTrigger>
+        <button className="flex cursor-pointer items-center gap-2 hover:opacity-80 transition-colors">
+          <TransactionsIcon />
+          <span className="text-sm font-medium tracking-[-0.5px] text-gray-800">
+            Transações
+          </span>
+          <ChevronDownIcon className="text-gray-900" />
+        </button>
       </DropdownMenuTrigger>
 
       <DropdownMenuContent className="w-[279px]">

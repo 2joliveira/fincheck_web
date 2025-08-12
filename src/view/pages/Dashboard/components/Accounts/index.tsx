@@ -1,14 +1,12 @@
 import { Swiper, SwiperSlide } from "swiper/react";
 import { EyeIcon } from "@/view/components/icons/EyeIcon";
-import { AccountCard } from "./AccountCard";
-
 import "swiper/css";
-import { SliderNavigation } from "./SliderNavigation";
 import { useAccountsController } from "./useAccountsController";
 import { formatCurrency } from "@/app/utils/formatCurrency";
 import { cn } from "@/app/utils/cn";
 import { Spinner } from "@/view/components";
 import { PlusIcon } from "@radix-ui/react-icons";
+import { AccountCard, SliderNavigation } from "./components";
 
 export function Accounts() {
   const {
@@ -19,6 +17,7 @@ export function Accounts() {
     toggleValuesVisibility,
     isLoading,
     accounts,
+    handleOpenNewAccountModal,
   } = useAccountsController();
 
   return (
@@ -67,8 +66,11 @@ export function Accounts() {
                   </strong>
                 </div>
 
-                <button className="mt-4 flex h-52 cursor-pointer flex-col items-center justify-center gap-4 rounded-2xl border-2 border-dashed border-teal-600 text-white">
-                  <div className="flex h-11 w-11 items-center justify-center rounded-full border-2 border-dashed border-white">
+                <button
+                  onClick={handleOpenNewAccountModal}
+                  className="group mt-4 flex h-52 cursor-pointer flex-col items-center justify-center gap-4 rounded-2xl border-2 border-dashed border-teal-600 text-teal-200 hover:border-white hover:text-white"
+                >
+                  <div className="flex h-11 w-11 items-center justify-center rounded-full border-2 border-dashed border-teal-200 group-hover:border-white">
                     <PlusIcon className="h-6 w-6" />
                   </div>
 
