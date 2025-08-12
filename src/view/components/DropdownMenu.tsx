@@ -5,19 +5,13 @@ export function DropdownMenuRoot({ children }: { children: React.ReactNode }) {
   return <RdxDropdownMenu.Root>{children}</RdxDropdownMenu.Root>;
 }
 
-interface DropdownMenuTriggerProps {
-  children: React.ReactNode;
-  className?: string;
-}
-
 export function DropdownMenuTrigger({
   children,
-  className,
-}: DropdownMenuTriggerProps) {
+}: {
+  children: React.ReactNode;
+}) {
   return (
-    <RdxDropdownMenu.Trigger
-      className={cn("cursor-pointer outline-none", className)}
-    >
+    <RdxDropdownMenu.Trigger className="outline-none" asChild>
       {children}
     </RdxDropdownMenu.Trigger>
   );
@@ -37,7 +31,7 @@ export function DropdownMenuContent({
       <RdxDropdownMenu.Content
         side="bottom"
         className={cn(
-          "space-y-2 z-50 rounded-2xl bg-white p-2 shadow-[0px_11px_20px_0px_rgba(0,0,0,0.10)]",
+          "z-50 space-y-2 rounded-2xl bg-white p-2 shadow-[0px_11px_20px_0px_rgba(0,0,0,0.10)]",
           "data-[side=bottom]:animate-slide-up-and-fade",
           "data-[side=top]:animate-slide-down-and-fade",
           className,

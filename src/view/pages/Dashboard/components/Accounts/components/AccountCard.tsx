@@ -1,7 +1,7 @@
 import { cn } from "@/app/utils/cn";
 import { formatCurrency } from "@/app/utils/formatCurrency";
 import { BankAccountTypeIcon } from "@/view/components/icons/BankAccountTypeIcon";
-import { useDashboard } from "../../context/DashboardContext";
+import { useDashboard } from "../../../context/DashboardContext";
 
 interface AccountCardProps {
   name: string;
