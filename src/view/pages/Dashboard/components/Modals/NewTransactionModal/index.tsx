@@ -1,4 +1,11 @@
-import { Input, InputCurrency, Modal, Select } from "@/view/components";
+import {
+  Button,
+  DatePickerInput,
+  Input,
+  InputCurrency,
+  Modal,
+  Select,
+} from "@/view/components";
 import { useNewTransactionController } from "./useNewTransactionController";
 
 export function NewATransactionModal() {
@@ -51,7 +58,13 @@ export function NewATransactionModal() {
               { value: "CASH", label: "Dinheiro Físico" },
             ]}
           />
+
+          <DatePickerInput />
         </section>
+
+        <Button type="submit" className="w-full mt-6">
+          Criar
+        </Button>
       </form>
     </Modal>
   );

@@ -1,4 +1,11 @@
-import { ColorsDropdownInput, Input, InputCurrency, Modal, Select } from "@/view/components";
+import {
+  Button,
+  ColorsDropdownInput,
+  Input,
+  InputCurrency,
+  Modal,
+  Select,
+} from "@/view/components";
 import { useNewAccountController } from "./useNewAccountController";
 
 export function NewAccountModal() {
@@ -34,6 +41,10 @@ export function NewAccountModal() {
 
           <ColorsDropdownInput />
         </section>
+
+        <Button type="submit" className="mt-6 w-full">
+          Criar
+        </Button>
       </form>
     </Modal>
   );

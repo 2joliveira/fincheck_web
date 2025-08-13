@@ -4,7 +4,7 @@ import { localStorageKeys } from "@/app/config/localStorageKeys";
 import { useQuery, useQueryClient } from "@tanstack/react-query";
 import { usersService } from "@/app/services/usersService";
 import toast from "react-hot-toast";
-import { LaunchScreen } from "@/view/components/LaunchScreen";
+import { LaunchScreen } from "@/view/components";
 
 export function AuthProvider({ children }: { children: React.ReactNode }) {
   const queryClient = useQueryClient();
