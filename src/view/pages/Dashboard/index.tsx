@@ -2,6 +2,7 @@ import { Logo, UserMenu } from "@/view/components";
 import { Accounts, Fab, Transactions } from "./components";
 import { DashboardProvider } from "./context/DashboardProvider";
 import { NewAccountModal } from "./components/Modals/NewAccountModal";
+import { NewATransactionModal } from "./components/Modals/NewTransactionModal";
 
 export function Dashboard() {
   return (
@@ -23,6 +24,7 @@ export function Dashboard() {
 
         <Fab />
         <NewAccountModal />
+        <NewATransactionModal />
       </div>
     </DashboardProvider>
   );

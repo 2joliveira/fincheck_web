@@ -6,6 +6,10 @@ interface DashboardContextValue {
   isNewAccountModalOpen: boolean;
   handleOpenNewAccountModal(): void;
   handleCloseNewAccountModal(): void;
+  isNewTransactionModalOpen: boolean;
+  handleOpenNewTransactionModal(type: "INCOME" | "EXPENSE"): void;
+  handleCloseNewTransactionModal(): void;
+  newTransactionType: "INCOME" | "EXPENSE" | null;
 }
 
 export const DashboardContext = createContext({} as DashboardContextValue);

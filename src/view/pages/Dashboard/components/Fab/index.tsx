@@ -10,27 +10,31 @@ import { PlusIcon } from "@radix-ui/react-icons";
 import { useDashboard } from "../../context/DashboardContext";
 
 export function Fab() {
-  const { handleOpenNewAccountModal } = useDashboard();
+  const { handleOpenNewAccountModal, handleOpenNewTransactionModal } =
+    useDashboard();
 
   return (
     <div className="fixed right-4 bottom-4">
       <DropdownMenuRoot>
         <DropdownMenuTrigger>
-          <button
-            className="flex h-12 w-12 items-center justify-center rounded-full
-              bg-teal-900 text-white hover:bg-teal-800 cursor-pointer outline-none"
-          >
+          <button className="flex h-12 w-12 cursor-pointer items-center justify-center rounded-full bg-teal-900 text-white outline-none hover:bg-teal-800">
             <PlusIcon className="h-6 w-6" />
           </button>
         </DropdownMenuTrigger>
 
         <DropdownMenuContent>
-          <DropdownMenuItem className="gap-2">
+          <DropdownMenuItem
+            className="gap-2"
+            handleOnSelect={() => handleOpenNewTransactionModal("EXPENSE")}
+          >
             <CategoryIcon type="expense" />
             Nova Despesa
           </DropdownMenuItem>
 
-          <DropdownMenuItem className="gap-2">
+          <DropdownMenuItem
+            className="gap-2"
+            handleOnSelect={() => handleOpenNewTransactionModal("INCOME")}
+          >
             <CategoryIcon type="income" />
             Nova Receita
           </DropdownMenuItem>

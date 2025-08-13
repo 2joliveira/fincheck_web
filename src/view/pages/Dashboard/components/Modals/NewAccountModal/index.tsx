@@ -1,9 +1,9 @@
 import { ColorsDropdownInput, Input, InputCurrency, Modal, Select } from "@/view/components";
-import { useNewAcccountController } from "./useNewAccountController";
+import { useNewAccountController } from "./useNewAccountController";
 
 export function NewAccountModal() {
   const { isNewAccountModalOpen, handleCloseNewAccountModal } =
-    useNewAcccountController();
+    useNewAccountController();
 
   return (
     <Modal

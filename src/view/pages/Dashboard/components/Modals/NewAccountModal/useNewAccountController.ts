@@ -1,6 +1,6 @@
 import { useDashboard } from "../../../context/DashboardContext";
 
-export function useNewAcccountController() {
+export function useNewAccountController() {
   const { isNewAccountModalOpen, handleCloseNewAccountModal } = useDashboard();
 
   return {
