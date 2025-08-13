@@ -6,3 +6,4 @@ export * from "./UserMenu";
 export * from "./Modal";
 export * from "./InputCurrency";
 export * from "./Select";
+export * from "./ColorsDropdownInput";
