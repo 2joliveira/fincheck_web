@@ -23,7 +23,14 @@ export function NewAccountModal() {
         <section className="mt-10 flex flex-col gap-4">
           <Input type="text" name="name" placeholder="Nome da Conta" />
 
-          <Select error="Selecione a porra do bagui" />
+          <Select
+            placeholder="Tipo"
+            options={[
+              { value: "INVESTMENT", label: "Investimentos" },
+              { value: "CHECKING", label: "Conta Corrente" },
+              { value: "CASH", label: "Dinheiro Físico" },
+            ]}
+          />
         </section>
       </form>
     </Modal>
