@@ -1,4 +1,4 @@
-import { Input, InputCurrency, Modal, Select } from "@/view/components";
+import { ColorsDropdownInput, Input, InputCurrency, Modal, Select } from "@/view/components";
 import { useNewAcccountController } from "./useNewAccountController";
 
 export function NewAccountModal() {
@@ -31,6 +31,8 @@ export function NewAccountModal() {
               { value: "CASH", label: "Dinheiro Físico" },
             ]}
           />
+
+          <ColorsDropdownInput />
         </section>
       </form>
     </Modal>
