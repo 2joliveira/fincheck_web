@@ -3,6 +3,7 @@ import { CrossCircledIcon } from "@radix-ui/react-icons";
 import { cn } from "@/app/utils/cn";
 import { formatDate } from "@/app/utils/formatDate";
 import { PopoverContent, PopoverRoot, PopoverTrigger } from "./Popover";
+import { DatePicker } from "./DatePicker";
 
 interface DatePickerInputProps {
   className?: string;
@@ -10,7 +11,7 @@ interface DatePickerInputProps {
 }
 
 export function DatePickerInput({ className, error }: DatePickerInputProps) {
-  const [selectedDate] = useState(new Date());
+  const [selectedDate, setSelectedDate] = useState(new Date());
 
   return (
     <div>
@@ -32,7 +33,10 @@ export function DatePickerInput({ className, error }: DatePickerInputProps) {
         </PopoverTrigger>
 
         <PopoverContent>
-          OPRAAAAI
+          <DatePicker
+            value={selectedDate}
+            onChange={(date) => setSelectedDate(date)}
+          />
         </PopoverContent>
       </PopoverRoot>
 
