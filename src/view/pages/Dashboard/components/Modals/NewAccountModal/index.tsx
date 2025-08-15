@@ -7,10 +7,17 @@ import {
   Select,
 } from "@/view/components";
 import { useNewAccountController } from "./useNewAccountController";
+import { Controller } from "react-hook-form";
 
 export function NewAccountModal() {
-  const { isNewAccountModalOpen, handleCloseNewAccountModal } =
-    useNewAccountController();
+  const {
+    isNewAccountModalOpen,
+    handleCloseNewAccountModal,
+    register,
+    control,
+    handleSubmit,
+    errors,
+  } = useNewAccountController();
 
   return (
     <Modal
@@ -18,17 +25,35 @@ export function NewAccountModal() {
       open={isNewAccountModalOpen}
       onClose={handleCloseNewAccountModal}
     >
-      <form>
+      <form onSubmit={handleSubmit}>
         <section>
-          <p className="text-xs tracking-[-0.5px] text-gray-600">Saldo</p>
+          <p className="text-xs tracking-[-0.5px] text-gray-600">
+            Saldo inicial
+          </p>
           <div className="flex items-center gap-2">
             <span className="text-lg tracking-[-0.5px] text-gray-600">R$</span>
-            <InputCurrency />
+            <Controller
+              name="initialBalance"
+              control={control}
+              defaultValue="0"
+              render={({ field: { onChange, value } }) => (
+                <InputCurrency
+                  error={errors.initialBalance?.message}
+                  onChange={onChange}
+                  value={value}
+                />
+              )}
+            />
           </div>
         </section>
 
         <section className="mt-10 flex flex-col gap-4">
-          <Input type="text" name="name" placeholder="Nome da Conta" />
+          <Input
+            type="text"
+            placeholder="Nome da Conta"
+            error={errors.name?.message}
+            {...register("name")}
+          />
 
           <Select
             placeholder="Tipo"
@@ -37,9 +62,10 @@ export function NewAccountModal() {
               { value: "CHECKING", label: "Conta Corrente" },
               { value: "CASH", label: "Dinheiro Físico" },
             ]}
+            error={errors.type?.message}
           />
 
-          <ColorsDropdownInput />
+          <ColorsDropdownInput error={errors.color?.message} />
         </section>
 
         <Button type="submit" className="mt-6 w-full">
