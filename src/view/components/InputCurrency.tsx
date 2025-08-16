@@ -15,7 +15,7 @@ export function InputCurrency({ error, onChange, value }: InputCurrencyProps) {
         decimalSeparator=","
         className="w-full text-[32px] font-bold tracking-[-1px] text-gray-800 outline-none"
         value={value}
-        onChange={(event) => onChange(event.target.value)}
+        onValueChange={(values) => onChange(values.value)}
       />
 
       {error && (
