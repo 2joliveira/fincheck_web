@@ -17,6 +17,7 @@ export function NewAccountModal() {
     control,
     handleSubmit,
     errors,
+    isLoading,
   } = useNewAccountController();
 
   return (
@@ -55,20 +56,39 @@ export function NewAccountModal() {
             {...register("name")}
           />
 
-          <Select
-            placeholder="Tipo"
-            options={[
-              { value: "INVESTMENT", label: "Investimentos" },
-              { value: "CHECKING", label: "Conta Corrente" },
-              { value: "CASH", label: "Dinheiro Físico" },
-            ]}
-            error={errors.type?.message}
+          <Controller
+            control={control}
+            name="type"
+            render={({ field: { onChange, value } }) => (
+              <Select
+                placeholder="Tipo"
+                options={[
+                  { value: "INVESTMENT", label: "Investimentos" },
+                  { value: "CHECKING", label: "Conta Corrente" },
+                  { value: "CASH", label: "Dinheiro Físico" },
+                ]}
+                error={errors.type?.message}
+                onChange={onChange}
+                value={value}
+              />
+            )}
           />
 
-          <ColorsDropdownInput error={errors.color?.message} />
+          <Controller
+            control={control}
+            name="color"
+            defaultValue=""
+            render={({ field: { onChange, value } }) => (
+              <ColorsDropdownInput
+                error={errors.color?.message}
+                onChange={onChange}
+                value={value}
+              />
+            )}
+          />
         </section>
 
-        <Button type="submit" className="mt-6 w-full">
+        <Button type="submit" className="mt-6 w-full" isLoading={isLoading}>
           Criar
         </Button>
       </form>

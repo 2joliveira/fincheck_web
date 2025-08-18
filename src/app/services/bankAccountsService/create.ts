@@ -2,7 +2,7 @@ import { httpClient } from "../httpClient";
 
 export interface CreateParams {
   name: string;
-  initialBalance: string;
+  initialBalance: number;
   color: string;
   type: "CHECKING" | "INVESTMENT" | "CASH";
 }

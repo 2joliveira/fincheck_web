@@ -9,15 +9,17 @@ import { ChevronDownIcon, CrossCircledIcon } from "@radix-ui/react-icons";
 import { ColorIcon } from "./icons/ColorIcon";
 import { useState } from "react";
 
-interface ColorsDropdownInputProps {
-  className?: string;
-  error?: string;
-}
-
 type Color = {
   color: string;
   bg: string;
 };
+
+interface ColorsDropdownInputProps {
+  className?: string;
+  error?: string;
+  onChange?(value: string): void;
+  value: string;
+}
 
 const colors: Color[] = [
   { color: "#868E96", bg: "#F8F9FA" },
@@ -39,11 +41,20 @@ const colors: Color[] = [
 export function ColorsDropdownInput({
   className,
   error,
+  value,
+  onChange,
 }: ColorsDropdownInputProps) {
-  const [selectedColor, setSelectedColor] = useState<Color | null>(null);
+  const [selectedColor, setSelectedColor] = useState<Color | null>(() => {
+    if (!value) {
+      return null;
+    }
+
+    return colors.find((color) => color.color === value) ?? null;
+  });
 
   function handleSelectColor(color: Color) {
     setSelectedColor(color);
+    onChange?.(color.color);
   }
 
   return (
