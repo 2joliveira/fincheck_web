@@ -3,29 +3,36 @@ import { Accounts, Fab, Transactions } from "./components";
 import { DashboardProvider } from "./context/DashboardProvider";
 import { NewAccountModal } from "./components/Modals/NewAccountModal";
 import { NewATransactionModal } from "./components/Modals/NewTransactionModal";
+import { EditAccountModal } from "./components/Modals/EditAccountModal";
+import { DashboardContext } from "./context/DashboardContext";
 
 export function Dashboard() {
   return (
     <DashboardProvider>
-      <div className="flex h-full w-full flex-col gap-4 p-4 md:p-8 md:pt-6">
-        <header className="flex h-12 items-center justify-between">
-          <Logo className="h-6 text-teal-900" />
-          <UserMenu />
-        </header>
+      <DashboardContext.Consumer>
+        {({ selectedBankAccount }) => (
+          <div className="flex h-full w-full flex-col gap-4 p-4 md:p-8 md:pt-6">
+            <header className="flex h-12 items-center justify-between">
+              <Logo className="h-6 text-teal-900" />
+              <UserMenu />
+            </header>
 
-        <main className="flex max-h-full flex-1 flex-col gap-4 md:flex-row">
-          <div className="w-full md:w-1/2">
-            <Accounts />
-          </div>
-          <div className="w-full md:w-1/2">
-            <Transactions />
-          </div>
-        </main>
+            <main className="flex max-h-full flex-1 flex-col gap-4 md:flex-row">
+              <div className="w-full md:w-1/2">
+                <Accounts />
+              </div>
+              <div className="w-full md:w-1/2">
+                <Transactions />
+              </div>
+            </main>
 
-        <Fab />
-        <NewAccountModal />
-        <NewATransactionModal />
-      </div>
+            <Fab />
+            <NewAccountModal />
+            {selectedBankAccount && <EditAccountModal />}
+            <NewATransactionModal />
+          </div>
+        )}
+      </DashboardContext.Consumer>
     </DashboardProvider>
   );
 }

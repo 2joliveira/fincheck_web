@@ -1,4 +1,5 @@
 import { createContext, useContext } from "react";
+import type { BankAccount } from "@/app/entities/BankAccount";
 
 interface DashboardContextValue {
   areValuesVisible: boolean;
@@ -6,6 +7,10 @@ interface DashboardContextValue {
   isNewAccountModalOpen: boolean;
   handleOpenNewAccountModal(): void;
   handleCloseNewAccountModal(): void;
+  isEditAccountModalOpen: boolean;
+  handleOpenEditAccountModal(bankAccount: BankAccount): void;
+  handleCloseEditAccountModal(): void;
+  selectedBankAccount: BankAccount | null;
   isNewTransactionModalOpen: boolean;
   handleOpenNewTransactionModal(type: "INCOME" | "EXPENSE"): void;
   handleCloseNewTransactionModal(): void;
