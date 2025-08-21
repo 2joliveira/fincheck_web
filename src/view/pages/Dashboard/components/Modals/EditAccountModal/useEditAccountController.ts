@@ -5,6 +5,7 @@ import { zodResolver } from "@hookform/resolvers/zod";
 import { bankAccountService } from "@/app/services/bankAccountsService";
 import { useMutation, useQueryClient } from "@tanstack/react-query";
 import toast from "react-hot-toast";
+import { useState } from "react";
 
 const schema = z.object({
   initialBalance: z.union([
@@ -43,6 +44,8 @@ export function useEditAccountController() {
     },
   });
 
+  const [isDeleteModalOpen, setIsDeleteModalOpen] = useState(false);
+
   const queryClient = useQueryClient();
 
   const { mutateAsync, isPending } = useMutation({
@@ -67,6 +70,14 @@ export function useEditAccountController() {
     }
   });
 
+  function handleOpenDeleteModal() {
+    setIsDeleteModalOpen(true);
+  }
+
+  function handleCloseDeleteModal() {
+    setIsDeleteModalOpen(false);
+  }
+
   return {
     isEditAccountModalOpen,
     handleCloseEditAccountModal,
@@ -75,5 +86,8 @@ export function useEditAccountController() {
     handleSubmit,
     errors,
     isLoading: isPending,
+    isDeleteModalOpen,
+    handleOpenDeleteModal,
+    handleCloseDeleteModal,
   };
 }
