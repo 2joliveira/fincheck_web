@@ -3,6 +3,7 @@ import { useDashboard } from "../../../context/DashboardContext";
 import { useForm } from "react-hook-form";
 import { zodResolver } from "@hookform/resolvers/zod";
 import { useBankAccounts } from "@/app/hooks/useBankAccounts";
+import { useCategories } from "@/app/hooks/useCategories";
 
 const schema = z.object({
   value: z.string().nonempty("Valor é obrigatório"),
@@ -22,6 +23,12 @@ export function useNewTransactionController() {
   } = useDashboard();
 
   const { accounts } = useBankAccounts();
+
+  const { categories: allCategories } = useCategories();
+
+  const categories = allCategories.filter(
+    (category) => category.type === newTransactionType,
+  );
 
   const {
     register,
@@ -47,5 +54,6 @@ export function useNewTransactionController() {
     handleSubmit,
     errors,
     accounts,
+    categories,
   };
 }
