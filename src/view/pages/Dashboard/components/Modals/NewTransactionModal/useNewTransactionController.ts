@@ -4,6 +4,9 @@ import { useForm } from "react-hook-form";
 import { zodResolver } from "@hookform/resolvers/zod";
 import { useBankAccounts } from "@/app/hooks/useBankAccounts";
 import { useCategories } from "@/app/hooks/useCategories";
+import { useMutation, useQueryClient } from "@tanstack/react-query";
+import { transactionsService } from "@/app/services/transactionsService";
+import toast from "react-hot-toast";
 
 const schema = z.object({
   value: z.string().nonempty("Valor é obrigatório"),
@@ -21,6 +24,8 @@ export function useNewTransactionController() {
     newTransactionType,
     handleCloseNewTransactionModal,
   } = useDashboard();
+
+  const queryCliente = useQueryClient();
 
   const { accounts } = useBankAccounts();
 
@@ -40,8 +45,28 @@ export function useNewTransactionController() {
     resolver: zodResolver(schema),
   });
 
-  const handleSubmit = hookeFormSubmit((data) => {
-    console.log({ data });
+  const { isPending, mutateAsync } = useMutation({
+    mutationFn: transactionsService.create,
+  });
+
+  const handleSubmit = hookeFormSubmit(async (data) => {
+    try {
+      await mutateAsync({
+        ...data,
+        value: Number(data.value),
+        date: data.date.toISOString(),
+        type: newTransactionType!,
+      });
+
+      queryCliente.invalidateQueries({ queryKey: ["transactions"] });
+      queryCliente.invalidateQueries({ queryKey: ["bankAccounts"] });
+
+      toast.success("Transação cadastrada com sucesso");
+      handleCloseNewTransactionModal();
+      reset();
+    } catch {
+      toast.error("Erro ao cadastrar uma transação");
+    }
   });
 
   return {
@@ -50,10 +75,10 @@ export function useNewTransactionController() {
     handleCloseNewTransactionModal,
     register,
     control,
-    reset,
     handleSubmit,
     errors,
     accounts,
     categories,
+    isLoading: isPending,
   };
 }
