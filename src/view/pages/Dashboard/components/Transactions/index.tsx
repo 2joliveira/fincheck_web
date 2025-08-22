@@ -26,6 +26,9 @@ export function Transactions() {
     isFiltersModalOpen,
     handleOpenFiltersModal,
     handleCloseFiltersModal,
+    filters,
+    handleChangeFilters,
+    handleAppyModalFilters,
   } = useTransactionsController();
 
   const hasTransactions = transactions.length > 0;
@@ -42,7 +45,10 @@ export function Transactions() {
         <>
           <header>
             <div className="flex items-center justify-between">
-              <TransactionFiltersDropdown />
+              <TransactionFiltersDropdown
+                onSelect={(type) => handleChangeFilters("type")(type)}
+                selectedType={filters.type}
+              />
 
               <button
                 className="cursor-pointer hover:opacity-70"
@@ -56,8 +62,10 @@ export function Transactions() {
               <Swiper
                 slidesPerView={3}
                 centeredSlides
-                onSlideChange={({ isBeginning, isEnd }) => {
+                initialSlide={filters.month}
+                onSlideChange={({ isBeginning, isEnd, realIndex }) => {
                   setSliderState({ isBeginning, isEnd });
+                  handleChangeFilters("month")(realIndex);
                 }}
               >
                 {MONTHS.map((month, index) => (
@@ -86,7 +94,6 @@ export function Transactions() {
                 <Spinner className="h-12 w-12" />
               </div>
             )}
-
             {!hasTransactions && !isLoading && (
               <div className="flex h-full flex-col items-center justify-center">
                 <img src={emptyStateImage} alt="Empty state" />
@@ -143,6 +150,7 @@ export function Transactions() {
       <FiltersModal
         open={isFiltersModalOpen}
         onClose={handleCloseFiltersModal}
+        onApplyFilters={handleAppyModalFilters}
       />
     </div>
   );
