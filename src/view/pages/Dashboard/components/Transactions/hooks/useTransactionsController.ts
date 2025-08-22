@@ -33,11 +33,17 @@ export function useTransactionsController() {
     setIsFiltersModalOpen(false);
   }
 
-  function handleChangeMonth(month: number) {
-    setfilters((prevState) => ({
-      ...prevState,
-      month,
-    }));
+  function handleChangeFilters<TFilter extends keyof TransactionsFilters>(
+    filter: TFilter,
+  ) {
+    return (value: TransactionsFilters[TFilter]) => {
+      if (value === filters[filter]) return;
+
+      setfilters((prevState) => ({
+        ...prevState,
+        [filter]: value,
+      }));
+    };
   }
 
   useEffect(() => {
@@ -55,6 +61,6 @@ export function useTransactionsController() {
     handleOpenFiltersModal,
     handleCloseFiltersModal,
     filters,
-    handleChangeMonth,
+    handleChangeFilters,
   };
 }
