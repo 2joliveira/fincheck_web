@@ -6,7 +6,7 @@ type TransactionsResponse = Array<Transaction>;
 export type TransactionsFilters = {
   month: number;
   year: number;
-  banckAccountId?: string;
+  bankAccountId?: string;
   type?: Transaction["type"];
 };
 

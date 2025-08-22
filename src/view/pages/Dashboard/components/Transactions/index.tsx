@@ -28,6 +28,7 @@ export function Transactions() {
     handleCloseFiltersModal,
     filters,
     handleChangeFilters,
+    handleAppyModalFilters,
   } = useTransactionsController();
 
   const hasTransactions = transactions.length > 0;
@@ -149,6 +150,7 @@ export function Transactions() {
       <FiltersModal
         open={isFiltersModalOpen}
         onClose={handleCloseFiltersModal}
+        onApplyFilters={handleAppyModalFilters}
       />
     </div>
   );
