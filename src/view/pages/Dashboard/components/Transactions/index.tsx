@@ -26,6 +26,8 @@ export function Transactions() {
     isFiltersModalOpen,
     handleOpenFiltersModal,
     handleCloseFiltersModal,
+    filters,
+    handleChangeMonth,
   } = useTransactionsController();
 
   const hasTransactions = transactions.length > 0;
@@ -56,8 +58,10 @@ export function Transactions() {
               <Swiper
                 slidesPerView={3}
                 centeredSlides
-                onSlideChange={({ isBeginning, isEnd }) => {
+                initialSlide={filters.month}
+                onSlideChange={({ isBeginning, isEnd, realIndex }) => {
                   setSliderState({ isBeginning, isEnd });
+                  handleChangeMonth(realIndex);
                 }}
               >
                 {MONTHS.map((month, index) => (
@@ -86,7 +90,6 @@ export function Transactions() {
                 <Spinner className="h-12 w-12" />
               </div>
             )}
-
             {!hasTransactions && !isLoading && (
               <div className="flex h-full flex-col items-center justify-center">
                 <img src={emptyStateImage} alt="Empty state" />
