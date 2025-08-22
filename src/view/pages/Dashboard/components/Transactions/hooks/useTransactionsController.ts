@@ -12,10 +12,9 @@ export function useTransactionsController() {
 
   const [isFiltersModalOpen, setIsFiltersModalOpen] = useState(false);
 
-  const { transactions } = useTransactions();
+  const { transactions, isLoadingTransactions, isInitialLoading } =
+    useTransactions();
 
-  console.log({ transactions });
-  
   function handleOpenFiltersModal() {
     setIsFiltersModalOpen(true);
   }
@@ -28,9 +27,9 @@ export function useTransactionsController() {
     areValuesVisible,
     sliderState,
     setSliderState,
-    isInitialLoading: false,
-    isLoading: false,
-    transactions: [1],
+    isInitialLoading: isInitialLoading,
+    isLoading: isLoadingTransactions,
+    transactions,
     isFiltersModalOpen,
     handleOpenFiltersModal,
     handleCloseFiltersModal,
