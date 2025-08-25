@@ -5,6 +5,9 @@ import { useBankAccounts } from "@/app/hooks/useBankAccounts";
 import { useCategories } from "@/app/hooks/useCategories";
 import { useMemo } from "react";
 import type { Transaction } from "@/app/entities/Transaction";
+import { useMutation, useQueryClient } from "@tanstack/react-query";
+import { transactionsService } from "@/app/services/transactionsService";
+import toast from "react-hot-toast";
 
 const schema = z.object({
   value: z.union([z.string().nonempty("Valor é obrigatório"), z.number()]),
@@ -16,7 +19,10 @@ const schema = z.object({
 
 type FormData = z.infer<typeof schema>;
 
-export function useEditTransactionController(transaction: Transaction | null) {
+export function useEditTransactionController(
+  transaction: Transaction | null,
+  onClose: () => void,
+) {
   const { accounts } = useBankAccounts();
 
   const { categories: allCategories } = useCategories();
@@ -43,8 +49,30 @@ export function useEditTransactionController(transaction: Transaction | null) {
     },
   });
 
-  const handleSubmit = hookeFormSubmit((data) => {
-    console.log({ data });
+  const queryClient = useQueryClient();
+
+  const { mutateAsync, isPending } = useMutation({
+    mutationFn: transactionsService.update,
+  });
+
+  const handleSubmit = hookeFormSubmit(async (data) => {
+    try {
+      await mutateAsync({
+        ...data,
+        id: transaction!.id,
+        type: transaction!.type,
+        value: Number(data!.value),
+        date: data!.date.toISOString(),
+      });
+
+      queryClient.invalidateQueries({ queryKey: ["transactions"] });
+      queryClient.invalidateQueries({ queryKey: ["bankAccounts"] });
+
+      toast.success("Transação editada com sucesso!");
+      onClose();
+    } catch {
+      toast.error("Erro ao editar transação!");
+    }
   });
 
   return {
@@ -54,6 +82,6 @@ export function useEditTransactionController(transaction: Transaction | null) {
     errors,
     accounts,
     categories,
-    isLoading: false,
+    isLoading: isPending,
   };
 }

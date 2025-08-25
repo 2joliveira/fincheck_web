@@ -29,7 +29,7 @@ export function EditTransactionModal({
     accounts,
     categories,
     isLoading,
-  } = useEditTransactionController(transaction);
+  } = useEditTransactionController(transaction, onClose);
 
   const isExpense = transaction?.type === "EXPENSE";
 
