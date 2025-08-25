@@ -14,6 +14,7 @@ import {
 import { MONTHS } from "@/app/config/constants";
 import emptyStateImage from "@/assets/empty-state.svg";
 import { formatDate } from "@/app/utils/formatDate";
+import { EditTransactionModal } from "../Modals/EditTransactionModal";
 
 export function Transactions() {
   const {
@@ -29,6 +30,10 @@ export function Transactions() {
     filters,
     handleChangeFilters,
     handleAppyModalFilters,
+    isEditModalOpen,
+    selectedTransaction,
+    handleOpenEditModal,
+    handleCloseEditModal,
   } = useTransactionsController();
 
   const hasTransactions = transactions.length > 0;
@@ -104,45 +109,57 @@ export function Transactions() {
               </div>
             )}
 
-            {hasTransactions &&
-              !isLoading &&
-              transactions.map((transaction) => (
-                <div
-                  key={transaction.id}
-                  className="flex items-center justify-between gap-4 rounded-2xl bg-white p-4"
-                >
-                  <div className="flex flex-1 items-center gap-3">
-                    <CategoryIcon
-                      type={
-                        transaction.type === "EXPENSE" ? "expense" : "income"
-                      }
-                      category={transaction.category?.icon}
-                    />
-
-                    <div>
-                      <strong className="block font-bold tracking-[-0.5px]">
-                        {transaction.name}
-                      </strong>
-                      <span className="text-sm text-gray-600">
-                        {formatDate(new Date(transaction.date))}
-                      </span>
-                    </div>
-                  </div>
-
-                  <span
-                    className={cn(
-                      "font-medium tracking-[-0.5px]",
-                      transaction.type === "EXPENSE"
-                        ? "text-red-800"
-                        : "text-green-800",
-                      !areValuesVisible && "blur-sm",
-                    )}
+            {hasTransactions && !isLoading && (
+              <>
+                {transactions.map((transaction) => (
+                  <div
+                    key={transaction.id}
+                    className="flex cursor-pointer items-center justify-between gap-4 rounded-2xl bg-white p-4 transition-colors hover:bg-gray-200"
+                    role="button"
+                    onClick={() => handleOpenEditModal(transaction)}
                   >
-                    {transaction.type === "EXPENSE" ? "- " : "+ "}
-                    {formatCurrency(transaction.value)}
-                  </span>
-                </div>
-              ))}
+                    <div className="flex flex-1 items-center gap-3">
+                      <CategoryIcon
+                        type={
+                          transaction.type === "EXPENSE" ? "expense" : "income"
+                        }
+                        category={transaction.category?.icon}
+                      />
+
+                      <div>
+                        <strong className="block font-bold tracking-[-0.5px]">
+                          {transaction.name}
+                        </strong>
+                        <span className="text-sm text-gray-600">
+                          {formatDate(new Date(transaction.date))}
+                        </span>
+                      </div>
+                    </div>
+
+                    <span
+                      className={cn(
+                        "font-medium tracking-[-0.5px]",
+                        transaction.type === "EXPENSE"
+                          ? "text-red-800"
+                          : "text-green-800",
+                        !areValuesVisible && "blur-sm",
+                      )}
+                    >
+                      {transaction.type === "EXPENSE" ? "- " : "+ "}
+                      {formatCurrency(transaction.value)}
+                    </span>
+                  </div>
+                ))}
+
+                {selectedTransaction && (
+                  <EditTransactionModal
+                    open={isEditModalOpen}
+                    onClose={handleCloseEditModal}
+                    transaction={selectedTransaction}
+                  />
+                )}
+              </>
+            )}
           </main>
         </>
       )}

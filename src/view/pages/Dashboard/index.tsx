@@ -2,7 +2,7 @@ import { Logo, UserMenu } from "@/view/components";
 import { Accounts, Fab, Transactions } from "./components";
 import { DashboardProvider } from "./context/DashboardProvider";
 import { NewAccountModal } from "./components/Modals/NewAccountModal";
-import { NewATransactionModal } from "./components/Modals/NewTransactionModal";
+import { NewTransactionModal } from "./components/Modals/NewTransactionModal";
 import { EditAccountModal } from "./components/Modals/EditAccountModal";
 import { DashboardContext } from "./context/DashboardContext";
 
@@ -29,7 +29,7 @@ export function Dashboard() {
             <Fab />
             <NewAccountModal />
             {selectedBankAccount && <EditAccountModal />}
-            <NewATransactionModal />
+            <NewTransactionModal />
           </div>
         )}
       </DashboardContext.Consumer>
