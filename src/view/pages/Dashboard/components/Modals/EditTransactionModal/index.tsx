@@ -6,14 +6,22 @@ import {
   Modal,
   Select,
 } from "@/view/components";
-import { useNewTransactionController } from "./useNewTransactionController";
 import { Controller } from "react-hook-form";
+import { useEditTransactionController } from "./useEditTransactionController";
+import type { Transaction } from "@/app/entities/Transaction";
 
-export function NewTransactionModal() {
+interface EditTransactionModalProps {
+  transaction: Transaction | null;
+  open: boolean;
+  onClose(): void;
+}
+
+export function EditTransactionModal({
+  transaction,
+  onClose,
+  open,
+}: EditTransactionModalProps) {
   const {
-    isNewTransactionModalOpen,
-    newTransactionType,
-    handleCloseNewTransactionModal,
     register,
     control,
     handleSubmit,
@@ -21,15 +29,15 @@ export function NewTransactionModal() {
     accounts,
     categories,
     isLoading,
-  } = useNewTransactionController();
+  } = useEditTransactionController(transaction);
 
-  const isExpense = newTransactionType === "EXPENSE";
+  const isExpense = transaction?.type === "EXPENSE";
 
   return (
     <Modal
-      title={isExpense ? "Nova Despesa" : "Nova Receita"}
-      open={isNewTransactionModalOpen}
-      onClose={handleCloseNewTransactionModal}
+      title={isExpense ? "Editar Despesa" : "Editar Receita"}
+      open={open}
+      onClose={onClose}
     >
       <form onSubmit={handleSubmit}>
         <section>
@@ -112,7 +120,7 @@ export function NewTransactionModal() {
         </section>
 
         <Button type="submit" className="mt-6 w-full" isLoading={isLoading}>
-          Criar
+          Salvar
         </Button>
       </form>
     </Modal>
