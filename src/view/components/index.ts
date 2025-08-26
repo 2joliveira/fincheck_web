@@ -10,3 +10,4 @@ export * from "./Select";
 export * from "./ColorsDropdownInput";
 export * from "./DatePickerInput";
 export * from "./Popover";
+export * from "./ConfirmDeleteModal";
