@@ -30,7 +30,7 @@ export function EditAccountModal() {
   if (isDeleteModalOpen) {
     return (
       <ConfirmDeleteModal
-        title="Tem certeza que deseja excluir essa conta ?"
+        title="Tem certeza que deseja excluir esta conta ?"
         description="Ao excluir essa conta, todos todos os registros de receita e despesa relacionados também serão excluídos"
         onClose={handleCloseDeleteModal}
         onConfirm={handleDeleteAccount}

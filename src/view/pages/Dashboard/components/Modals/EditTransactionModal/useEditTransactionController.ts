@@ -1,13 +1,13 @@
-import z from "zod";
+import { useMemo, useState } from "react";
 import { useForm } from "react-hook-form";
+import toast from "react-hot-toast";
+import z from "zod";
 import { zodResolver } from "@hookform/resolvers/zod";
+import { useMutation, useQueryClient } from "@tanstack/react-query";
+import type { Transaction } from "@/app/entities/Transaction";
 import { useBankAccounts } from "@/app/hooks/useBankAccounts";
 import { useCategories } from "@/app/hooks/useCategories";
-import { useMemo } from "react";
-import type { Transaction } from "@/app/entities/Transaction";
-import { useMutation, useQueryClient } from "@tanstack/react-query";
 import { transactionsService } from "@/app/services/transactionsService";
-import toast from "react-hot-toast";
 
 const schema = z.object({
   value: z.union([z.string().nonempty("Valor é obrigatório"), z.number()]),
@@ -23,6 +23,8 @@ export function useEditTransactionController(
   transaction: Transaction | null,
   onClose: () => void,
 ) {
+  const [isDeleteModalOpen, setIsDeleteModalOpen] = useState(false);
+
   const { accounts } = useBankAccounts();
 
   const { categories: allCategories } = useCategories();
@@ -51,13 +53,18 @@ export function useEditTransactionController(
 
   const queryClient = useQueryClient();
 
-  const { mutateAsync, isPending } = useMutation({
+  const { mutateAsync: updateTransaction, isPending } = useMutation({
     mutationFn: transactionsService.update,
   });
 
+  const { mutateAsync: removeTransaction, isPending: isLoadingDelete } =
+    useMutation({
+      mutationFn: transactionsService.remove,
+    });
+
   const handleSubmit = hookeFormSubmit(async (data) => {
     try {
-      await mutateAsync({
+      await updateTransaction({
         ...data,
         id: transaction!.id,
         type: transaction!.type,
@@ -75,6 +82,29 @@ export function useEditTransactionController(
     }
   });
 
+  async function handleDeleteTransaction() {
+    try {
+      await removeTransaction(transaction!.id);
+
+      queryClient.invalidateQueries({ queryKey: ["transactions"] });
+      queryClient.invalidateQueries({ queryKey: ["bankAccounts"] });
+
+      toast.success("Transação deletada com sucesso!");
+
+      onClose();
+    } catch {
+      toast.error("Erro ao deletar transação!");
+    }
+  }
+
+  function handleCloseDeleteModal() {
+    setIsDeleteModalOpen(false);
+  }
+
+  function handleOpenDeleteModal() {
+    setIsDeleteModalOpen(true);
+  }
+
   return {
     register,
     control,
@@ -83,5 +113,10 @@ export function useEditTransactionController(
     accounts,
     categories,
     isLoading: isPending,
+    isDeleteModalOpen,
+    isLoadingDelete,
+    handleDeleteTransaction,
+    handleCloseDeleteModal,
+    handleOpenDeleteModal,
   };
 }
