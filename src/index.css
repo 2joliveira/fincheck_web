@@ -1,7 +1,7 @@
 @import "tailwindcss";
 
 @theme {
-  --font: "DM Sans";
+  --font: ["DM Sans", 'sans-serif'];
 
   --color-*: initial;
   --color-white: #ffffff;
