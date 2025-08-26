@@ -8,14 +8,14 @@ import {
 import { useAuth } from "@/app/hooks/useAuth";
 
 export function UserMenu() {
-  const { signout } = useAuth();
+  const { signout, user } = useAuth();
 
   return (
     <DropdownMenuRoot>
       <DropdownMenuTrigger>
         <button className="flex h-12 w-12 cursor-pointer items-center justify-center rounded-full border border-teal-100 bg-teal-50 hover:bg-teal-100">
           <span className="tracking[-0.5px] text-sm font-medium text-teal-900">
-            JO
+            {user?.name.slice(0, 2).toUpperCase()}
           </span>
         </button>
       </DropdownMenuTrigger>
