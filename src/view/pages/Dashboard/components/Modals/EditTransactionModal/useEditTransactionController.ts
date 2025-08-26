@@ -24,7 +24,7 @@ export function useEditTransactionController(
   onClose: () => void,
 ) {
   const [isDeleteModalOpen, setIsDeleteModalOpen] = useState(false);
-  
+
   const { accounts } = useBankAccounts();
 
   const { categories: allCategories } = useCategories();
@@ -53,13 +53,18 @@ export function useEditTransactionController(
 
   const queryClient = useQueryClient();
 
-  const { mutateAsync, isPending } = useMutation({
+  const { mutateAsync: updateTransaction, isPending } = useMutation({
     mutationFn: transactionsService.update,
   });
 
+  const { mutateAsync: removeTransaction, isPending: isLoadingDelete } =
+    useMutation({
+      mutationFn: transactionsService.remove,
+    });
+
   const handleSubmit = hookeFormSubmit(async (data) => {
     try {
-      await mutateAsync({
+      await updateTransaction({
         ...data,
         id: transaction!.id,
         type: transaction!.type,
@@ -77,12 +82,23 @@ export function useEditTransactionController(
     }
   });
 
-  function handleDeleteTransaction() {
-    console.log("delete")
+  async function handleDeleteTransaction() {
+    try {
+      await removeTransaction(transaction!.id);
+
+      queryClient.invalidateQueries({ queryKey: ["transactions"] });
+      queryClient.invalidateQueries({ queryKey: ["bankAccounts"] });
+
+      toast.success("Transação deletada com sucesso!");
+
+      onClose();
+    } catch {
+      toast.error("Erro ao deletar transação!");
+    }
   }
 
   function handleCloseDeleteModal() {
-    setIsDeleteModalOpen(false)
+    setIsDeleteModalOpen(false);
   }
 
   function handleOpenDeleteModal() {
@@ -98,7 +114,7 @@ export function useEditTransactionController(
     categories,
     isLoading: isPending,
     isDeleteModalOpen,
-    isLoadingDelete: false,
+    isLoadingDelete,
     handleDeleteTransaction,
     handleCloseDeleteModal,
     handleOpenDeleteModal,
