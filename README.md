@@ -1,69 +1,84 @@
-# React + TypeScript + Vite
+# Fincheck 
 
-This template provides a minimal setup to get React working in Vite with HMR and some ESLint rules.
+O Fincheck é um aplicativo desenvolvido para ajudar usuários a monitorar suas finanças pessoais de forma fácil e eficiente. O objetivo do projeto é fornecer ferramentas que permitam o controle total sobre contas bancárias, investimentos, despesas, receitas e planejamento financeiro.
 
-Currently, two official plugins are available:
+## 🚀 Tecnologias
 
-- [@vitejs/plugin-react](https://github.com/vitejs/vite-plugin-react/blob/main/packages/plugin-react) uses [Babel](https://babeljs.io/) for Fast Refresh
-- [@vitejs/plugin-react-swc](https://github.com/vitejs/vite-plugin-react/blob/main/packages/plugin-react-swc) uses [SWC](https://swc.rs/) for Fast Refresh
+- **React** - Biblioteca para interfaces de usuário
+- **TypeScript** - Superset JavaScript com tipagem estática
+- **Vite** - Build tool e servidor de desenvolvimento
+- **TailwindCSS** - Framework CSS utility-first
+- **Tailwind Merge** - Juntar classes do Tailwind e resolver conflitos automaticamente
+- **CLSX** - Montar strings de classes dinamicamente
+- **React Router Dom** - Biblioteca de roteamento
+- **React Hook Form** - Biblioteca para lidar com formulários no React
+- **Zod** - Biblioteca para validação e criação de schemas
+- **TanStack React Query** - Gerenciamento de estado, servidor e cache
+- **Radix UI** - Componentes primitivos acessíveis
+- **Axios** - Requisições HTTP
+- **React day picker** - Criar calendários e seletores de data
+- **React hot toast** - Mostrar notificações toast no React
+- **React number format** - Formatar números em inputs
+- **Swiper** - Criação de sliders e carrosséis 
 
-## Expanding the ESLint configuration
+## 📂 Fundamentos abordados na criação do projeto
 
-If you are developing a production application, we recommend updating the configuration to enable type-aware lint rules:
+- **Configuração do ambiente com Vite + React + Tailwind.**
 
-```js
-export default tseslint.config([
-  globalIgnores(['dist']),
-  {
-    files: ['**/*.{ts,tsx}'],
-    extends: [
-      // Other configs...
+- **Design System na prática, criando componentes reutilizáveis.**
 
-      // Remove tseslint.configs.recommended and replace with this
-      ...tseslint.configs.recommendedTypeChecked,
-      // Alternatively, use this for stricter rules
-      ...tseslint.configs.strictTypeChecked,
-      // Optionally, add this for stylistic rules
-      ...tseslint.configs.stylisticTypeChecked,
+- **Configuração de rotas públicas e privadas com React Router DOM.**
 
-      // Other configs...
-    ],
-    languageOptions: {
-      parserOptions: {
-        project: ['./tsconfig.node.json', './tsconfig.app.json'],
-        tsconfigRootDir: import.meta.dirname,
-      },
-      // other options...
-    },
-  },
-])
-```
+- **Criação de layouts responsivos utilizando Tailwind.**
 
-You can also install [eslint-plugin-react-x](https://github.com/Rel1cx/eslint-react/tree/main/packages/plugins/eslint-plugin-react-x) and [eslint-plugin-react-dom](https://github.com/Rel1cx/eslint-react/tree/main/packages/plugins/eslint-plugin-react-dom) for React-specific lint rules:
+- **Padrões de componentes (function vs const) e boas práticas.**
 
-```js
-// eslint.config.js
-import reactX from 'eslint-plugin-react-x'
-import reactDom from 'eslint-plugin-react-dom'
+- **Dropdowns acessíveis e estilizados com Radix UI.**
 
-export default tseslint.config([
-  globalIgnores(['dist']),
-  {
-    files: ['**/*.{ts,tsx}'],
-    extends: [
-      // Other configs...
-      // Enable lint rules for React
-      reactX.configs['recommended-typescript'],
-      // Enable lint rules for React DOM
-      reactDom.configs.recommended,
-    ],
-    languageOptions: {
-      parserOptions: {
-        project: ['./tsconfig.node.json', './tsconfig.app.json'],
-        tsconfigRootDir: import.meta.dirname,
-      },
-      // other options...
-    },
-  },
-])
-```
+- **Modais reutilizáveis para formulários, filtros e ações rápidas.**
+
+- **Dashboard com carrossel de contas bancárias utilizando Swiper.**
+
+- **Path Aliasing.**
+
+## ✅ Funcionalidades
+
+- **CRUD de contas bancárias**
+
+- **CRUD de transações**
+
+- **Filtro de transações por: mês / ano / tipo / conta bancária**
+
+- **Listagem de categorias**
+
+
+## ⚙️ Configuração do Projeto
+
+### Pré-requisitos
+
+- Node.js (versão 22.14.0)
+- npm ou yarn
+
+### Instalação
+
+1. Clone o repositório
+2. Instale as dependências:
+   ```bash
+   npm install
+   ```
+
+3. Execute o servidor de desenvolvimento:
+   ```bash
+   npm run dev
+   ```
+
+### Scripts Disponíveis
+
+- `npm run dev` - Inicia o servidor de desenvolvimento
+- `npm run build` - Gera build de produção
+- `npm run preview` - Preview do build de produção
+
+### Backend
+
+   O projeto consome uma API que deve estar rodando na porta 3333. Certifique-se de que o backend esteja configurado e executando antes de iniciar o frontend localmente.
+ 
