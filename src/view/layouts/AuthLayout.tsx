@@ -5,7 +5,7 @@ import { Logo } from "../components";
 export function AuthLayout() {
   return (
     <div className="flex h-full w-full gap-4">
-      <div className="flex h-full flex-col items-center justify-center gap-16 sm:w-full 2xl:w-1/2">
+      <div className="flex h-full w-full flex-col items-center justify-center gap-16 lg:w-1/2">
         <Logo className="h-6 text-gray-500" />
 
         <div className="w-full max-w-[504px] px-8">
